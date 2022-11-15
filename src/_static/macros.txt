@@ -1,0 +1,3 @@
+\o:{\mathcal O}
+\op:{\operatorname}
+\lcm:{\operatorname{lcm}}

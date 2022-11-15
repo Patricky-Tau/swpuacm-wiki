@@ -1,0 +1,35 @@
+[book]
+authors         = ["patricky-tau"]
+language        = "zh-cn"
+multilingual    = false
+src             = "src"
+title           = "SWPUACM Wiki"
+
+[preprocessor]
+
+[preprocessor.catppuccin]
+assets_version  = "0.1.1" # DO NOT EDIT: Managed by `mdbook-catppuccin install`
+
+[preprocessor.katex]
+macros = "src/_static/macros.txt"
+
+[output]
+
+[output.katex]
+
+[output.html]
+# theme
+additional-css      = ['./theme/catppuccin.css', './theme/catppuccin-highlight.css']
+# preference
+no-section-label    = true
+# deploy
+cname               = "wiki.swpuacm.cn"
+git-repository-url  = "https://github.com/patricky-tau/swpuacm-wiki/"
+edit-url-template   = "https://github.com/patricky-tau/swpuacm-wiki/edit/main/{path}"
+
+[output.html.print]
+enable              = false
+
+[output.html.fold]
+enable              = true
+level               = 1
