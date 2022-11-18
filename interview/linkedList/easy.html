@@ -148,6 +148,7 @@
 <p>练习：</p>
 <ul>
 <li><a href="https://leetcode.cn/problems/reverse-linked-list/">leetcode 206. 反转链表</a></li>
+<li><a href="https://leetcode.cn/problems/merge-in-between-linked-lists/">leetcode 1669. 合并两个链表</a></li>
 </ul>
 <h3 id="删除节点"><a class="header" href="#删除节点">删除节点</a></h3>
 <ul>
@@ -211,9 +212,7 @@
     auto ret = &amp; dat;
 
     while (l1 &amp;&amp; l2) {
-        if (l1-&gt;val &gt; l2-&gt;val) {
-            std::swap(l1, l2);
-        }
+        if (l1-&gt;val &gt; l2-&gt;val) { std::swap(l1, l2); }
         ret = ret-&gt;next = std::exchange(l1, l1-&gt;next);
     }
 
@@ -233,8 +232,9 @@
     return l1;
 }
 </code></pre>
-<h4 id="leetcode-面试题-0202-返回倒数第-k-个节点"><a class="header" href="#leetcode-面试题-0202-返回倒数第-k-个节点"><a href="https://leetcode.cn/problems/kth-node-from-end-of-list-lcci/">leetcode 面试题 02.02. 返回倒数第 k 个节点</a></a></h4>
-<p>这题挺有趣的。维护两个同一起点指针，一个先走 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 步；随后同时走，前面的走到 <code>nullptr</code>时，后者就到了目的地。</p>
+<h3 id="剑指-offer-22-链表中倒数第k个节点"><a class="header" href="#剑指-offer-22-链表中倒数第k个节点"><a href="https://leetcode.cn/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/">剑指 Offer 22. 链表中倒数第k个节点</a></a></h3>
+<p>这题挺有趣的。</p>
+<p>维护两个同一起点指针，一个先走 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 步；随后同时走，前面的走到 <code>nullptr</code>时，后者就到了目的地。</p>
 
                     </main>
 
