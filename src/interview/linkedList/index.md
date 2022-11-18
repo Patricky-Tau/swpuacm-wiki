@@ -35,6 +35,8 @@ for (auto it = head; it; it = it->next) { }
 练习：
 
 - [leetcode 1290. 二进制链表转整数](https://leetcode.cn/problems/convert-binary-number-in-a-linked-list-to-integer/)
+- [leetcode 2. 两数相加](https://leetcode.cn/problems/add-two-numbers/)
+- [leetcode 445. 两数相加 II](https://leetcode.cn/problems/add-two-numbers-ii/)
 - [leetcode 160. 相交链表](https://leetcode.cn/problems/intersection-of-two-linked-lists/)
 - [剑指 Offer 06. 从尾到头打印链表](https://leetcode.cn/problems/cong-wei-dao-tou-da-yin-lian-biao-lcof/)
 

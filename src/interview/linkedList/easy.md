@@ -14,6 +14,7 @@ void push_back(ListNode *p, int x) {
 练习：
 
 - [leetcode 206. 反转链表](https://leetcode.cn/problems/reverse-linked-list/)
+- [leetcode 1669. 合并两个链表](https://leetcode.cn/problems/merge-in-between-linked-lists/)
 
 ### 删除节点
 
@@ -87,9 +88,7 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
     auto ret = & dat;
 
     while (l1 && l2) {
-        if (l1->val > l2->val) {
-            std::swap(l1, l2);
-        }
+        if (l1->val > l2->val) { std::swap(l1, l2); }
         ret = ret->next = std::exchange(l1, l1->next);
     }
 
@@ -114,7 +113,9 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
 }
 ```
 
-#### [leetcode 面试题 02.02. 返回倒数第 k 个节点](https://leetcode.cn/problems/kth-node-from-end-of-list-lcci/)
+### [剑指 Offer 22. 链表中倒数第k个节点](https://leetcode.cn/problems/lian-biao-zhong-dao-shu-di-kge-jie-dian-lcof/)
 
-这题挺有趣的。维护两个同一起点指针，一个先走 $k$ 步；随后同时走，前面的走到 `nullptr`时，后者就到了目的地。
+这题挺有趣的。
+
+维护两个同一起点指针，一个先走 $k$ 步；随后同时走，前面的走到 `nullptr`时，后者就到了目的地。
 
