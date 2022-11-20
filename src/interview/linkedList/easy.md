@@ -34,7 +34,6 @@ void erase(ListNode *p) {
 练习：
 
 - [leetcode 83. 删除排序链表中的重复元素](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/)
-
 - [leetcode 203. 移除链表元素](https://leetcode.cn/problems/remove-linked-list-elements/)
 - [leetcode 面试题 02.01. 移除重复节点](https://leetcode.cn/problems/remove-duplicate-node-lcci/)
 
@@ -70,7 +69,6 @@ ListNode *detectCycle(ListNode *head) {
 练习：
 
 - [leetcode 876. 链表的中间结点](https://leetcode.cn/problems/middle-of-the-linked-list/)
-
 - [leetcode 234. 回文链表](https://leetcode.cn/problems/palindrome-linked-list/)
 
 ----
