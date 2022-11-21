@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>面试题 - SWPUACM Wiki</title>
+        <title>STL - SWPUACM Wiki</title>
         <!-- Custom HTML head -->
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html">前言、阅读与编写指南</a></li><li class="chapter-item expanded "><a href="../lang/index.html">语言基础</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../lang/cpp.html">C++</a></li><li class="chapter-item "><a href="../lang/stl.html">STL</a></li><li class="chapter-item "><a href="../lang/pb_ds.html">pb_ds</a></li></ol></li><li class="chapter-item expanded "><a href="../basic/index.html">算法基础</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../basic/prefix-sum.html">前缀和与差分</a></li><li class="chapter-item "><a href="../basic/binary-search.html">二分</a></li></ol></li><li class="chapter-item expanded "><a href="../interview/index.html" class="active">面试题</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../interview/linkedList/index.html">链表</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../interview/linkedList/easy.html">基础</a></li></ol></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html">前言、阅读与编写指南</a></li><li class="chapter-item expanded "><a href="../lang/index.html">语言基础</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../lang/cpp.html">C++</a></li><li class="chapter-item expanded "><a href="../lang/stl.html" class="active">STL</a></li><li class="chapter-item "><a href="../lang/pb_ds.html">pb_ds</a></li></ol></li><li class="chapter-item expanded "><a href="../basic/index.html">算法基础</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../basic/prefix-sum.html">前缀和与差分</a></li><li class="chapter-item "><a href="../basic/binary-search.html">二分</a></li></ol></li><li class="chapter-item expanded "><a href="../interview/index.html">面试题</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../interview/linkedList/index.html">链表</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../interview/linkedList/easy.html">基础</a></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -110,7 +110,7 @@
                         <a href="https://github.com/patricky-tau/swpuacm-wiki/" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        <a href="https://github.com/patricky-tau/swpuacm-wiki/edit/main/src/interview/index.md" title="Suggest an edit" aria-label="Suggest an edit">
+                        <a href="https://github.com/patricky-tau/swpuacm-wiki/edit/main/src/lang/stl.md" title="Suggest an edit" aria-label="Suggest an edit">
                             <i id="git-edit-button" class="fa fa-edit"></i>
                         </a>
                     </div>
@@ -138,16 +138,16 @@
                 <div id="content" class="content">
                     <main>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
-<p>这一部分将介绍若干面试中可能遇到的题目，他们对 ACM 来说毫无帮助。</p>
+<h1 id="stl"><a class="header" href="#stl">STL</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../basic/binary-search.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../lang/cpp.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../interview/linkedList/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../lang/pb_ds.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -156,10 +156,10 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../basic/binary-search.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../lang/cpp.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../interview/linkedList/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../lang/pb_ds.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
