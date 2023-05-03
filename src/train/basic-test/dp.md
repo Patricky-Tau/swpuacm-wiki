@@ -1,7 +1,8 @@
 # 第一次摸底测试参考题解
 
+链接：<https://vjudge.net/contest/556525>，补题请自行 clone。
+
 ### LCS
-- <https://atcoder.jp/contests/dp/tasks/dp_f>
 > 求两字符串 $s, t$ 的最长公共子序列。
 >
 > $|s|, |t| \leq 3000$
@@ -75,8 +76,7 @@ int main() {
 </details>
 
 ### Grid 2
-- <https://atcoder.jp/contests/dp/tasks/dp_y>
-> 同 [Grid 1](https://www.cnblogs.com/patricky/p/train-20230418.html#grid-1)，但给出所有障碍点的坐标。
+> 给出所有障碍点的坐标的方格取数问题。
 >
 > 障碍点数 $n \leq 10^3; h, w \leq 10^5$。
 
@@ -147,7 +147,6 @@ int main() {
 </details>
 
 ### Vacation
-- <https://atcoder.jp/contests/dp/tasks/dp_c>
 
 > 小明在接下来的 $n$ 天，可以选择三种事件并获得 $a_i / b_i / c_i$ 的快乐值，但是他不能连续两天及以上做同样的事。问最大的欢乐值是多少？
 >
@@ -198,7 +197,6 @@ int main() {
 
 
 ### Grouping
-- <https://atcoder.jp/contests/dp/tasks/dp_u>
 > 将物品分组，如果 $i, j$ 在一组将会得到 $a_{i, j}$ 的分。问所有分组情况下最大得分。
 >
 > $n \leq 16; |a_{i, j}| \leq 10^9$。
@@ -267,8 +265,6 @@ int main() {
 </details>
 
 ### Longest Path
-- <https://atcoder.jp/contests/dp/tasks/dp_g>
-
 > DAG 求最长路。
 >
 > $n \leq 10^5; m \leq 10^5$。
