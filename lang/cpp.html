@@ -262,7 +262,7 @@ namespace R { int _hash[maxn]; }
 </div>
 <p>简单说来就是将某函数绑定到某运算符上（优先级与之前一致），常见的如定义一个<u><i>不小<sup class="footnote-reference"><a href="#10">10</a></sup></i></u>的矩阵：</p>
 <div class="footnote-definition" id="10"><sup class="footnote-definition-label">10</sup>
-<p>小矩阵请直接使用 <code>array&lt;N, array&lt;int, N&gt;&gt;</code></p>
+<p>小矩阵请直接使用 <code>array&lt;array&lt;int, N&gt;, N&gt;</code></p>
 </div>
 <pre><code class="language-cpp">template&lt;class T = int&gt;
 struct Matrix {
