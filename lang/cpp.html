@@ -76,7 +76,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html">前言、阅读与编写指南</a></li><li class="chapter-item expanded "><a href="../lang/index.html">语言基础</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lang/cpp.html" class="active">C++</a></li><li class="chapter-item "><a href="../lang/stl.html">STL</a></li><li class="chapter-item "><a href="../lang/pb_ds.html">pb_ds</a></li></ol></li><li class="chapter-item expanded "><a href="../basic/index.html">算法基础</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../basic/prefix-sum.html">前缀和与差分</a></li><li class="chapter-item "><a href="../basic/binary-search.html">二分</a></li></ol></li><li class="chapter-item expanded "><a href="../interview/index.html">面试题</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../interview/linkedList/index.html">链表</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../interview/linkedList/easy.html">基础</a></li></ol></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../index.html">前言、阅读与编写指南</a></li><li class="chapter-item expanded "><a href="../lang/index.html">语言基础</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../lang/cpp.html" class="active">C++</a></li></ol></li><li class="chapter-item expanded "><a href="../train/index.html">训练记录</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../train/basic-test/index.html">摸底测试</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../train/basic-test/dp.html">动态规划</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../interview/index.html">面试题</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../interview/linkedList/index.html">链表</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../interview/linkedList/easy.html">基础</a></li></ol></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -138,7 +138,708 @@
                 <div id="content" class="content">
                     <main>
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
-<h1 id="c"><a class="header" href="#c">C++</a></h1>
+<h1 id="算法竞赛中的-c-语法操作"><a class="header" href="#算法竞赛中的-c-语法操作">算法竞赛中的 C++ 语法操作</a></h1>
+<h2 id="前言"><a class="header" href="#前言">前言</a></h2>
+<p>昨天在某群里看到有人问 「有没有那种总结好的语法技巧啊」。突然想到自己也没有做过类似的总结，于是就有了这篇文章。需要注意的是，本文仅列出了一些常见技巧，<u><i>欢迎指正以及补充</i></u>！</p>
+<p><i>本文的写作顺序<u><i>并不总</i></u>符合认知的先后，如果有任何疑问，请善用搜索引擎或 <kbd>Ctrl-F</kbd> 查找该内容。 </i></p>
+<p><b>算法竞赛代码与工程代码目的与标准<u>并不完全</u>相同，请勿以工程角度看待此文章中的若干「技巧」。同时笔者也需要指出，许多算法竞赛的习惯并不适用于工程。</b></p>
+<ul>
+<li>用 <code>!</code> 标记了最近新增的条目。</li>
+<li>用 <code>*</code> 标记了最近修改的条目。</li>
+<li>用 <code>~</code> 标记了「这其实是一个<u><i>坏</i></u>习惯，但算法竞赛就这样用吧」。</li>
+<li>用 <code>^</code> 标记了准备删除的条目，笔者<b>将在下次更新中移除</b>这些条目。</li>
+</ul>
+<p>作者是个老鸽子，乐观情况下<u><i>平均</i></u>一个月维护一次。另，本文有搬迁至 github 的想法，届时文章将会更加精美全面，敬请期待。</p>
+<p>（2023-04-10）假的，可能等不到了，现附上 Markdown，读者可随意使用，欢迎接力。</p>
+<h2 id="预处理1"><a class="header" href="#预处理1">预处理<sup class="footnote-reference"><a href="#1">1</a></sup></a></h2>
+<div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
+<p>cppreference 预处理器 <a href="https://en.cppreference.com/w/cpp/preprocessor">https://en.cppreference.com/w/cpp/preprocessor</a></p>
+</div>
+<h3 id="-万能头2及其预编译--include"><a class="header" href="#-万能头2及其预编译--include">~ 万能头<sup class="footnote-reference"><a href="#2">2</a></sup>及其预编译 —— #include</a></h3>
+<div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
+<p>为什么你不应该使用万能头 <a href="https://stackoverflow.com/questions/31816095/why-should-i-not-include-bits-stdc-h">https://stackoverflow.com/questions/31816095/why-should-i-not-include-bits-stdc-h</a></p>
+</div>
+<p><b>要使用万能头，请使用 g++ 作为编译器。</b></p>
+<pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+</code></pre>
+<p>另，万能头本身十分庞大，预编译是节省编译时间的重要手段，具体方法如下：</p>
+<ol>
+<li>找到本机 <code>bits/stdc++.h</code> ，笔者该文件位置在 <code>/usr/include/c++/12.1.1/x86_64-pc-linux-gnu/bits/stdc++.h</code></li>
+<li>运行 <code>g++ --yourflags bits/stdc++.h</code> ，其中 <code>--yourflags</code> 代表你喜好的参数</li>
+<li>下次编译也使用第 2 步提到的指令编译。为节省生命，建议写入 <code>CMakeLists.txt</code></li>
+</ol>
+<h3 id="文本替换宏3----define--undef--预定义替换宏"><a class="header" href="#文本替换宏3----define--undef--预定义替换宏">文本替换宏<sup class="footnote-reference"><a href="#3">3</a></sup>   —— #define / #undef / 预定义替换宏</a></h3>
+<div class="footnote-definition" id="3"><sup class="footnote-definition-label">3</sup>
+<p><a href="https://en.cppreference.com/w/cpp/preprocessor/replace">https://en.cppreference.com/w/cpp/preprocessor/replace</a></p>
+</div>
+<p>许多选手喜欢定义若干宏，读者要决定是否喜欢这些大可自行尝试。在此笔者列出一些较为常见的文本替换宏：</p>
+<pre><code class="language-cpp">#define int long long   // 可能报告为错误（事实上确实不应这样做)
+                        // 下文或 #undef int 之后 int main() { }
+                        //    或 signed / int32_t main() { }  
+
+// ##x 将连接 x，如 i##i 传入 x2 最终会变为 x2x2
+#define rep(i, s, e) for (auto i = s, i##i = e; i &lt;= i##i; i ++)
+#define per(i, s, e) for (auto i = s, i##i = e; i &gt;= i##i; i --)
+
+#define ls i &lt;&lt; 1       // 二叉树的数组实现，ls 表示左儿子 2i
+#define rs ls | 1       // 同上，rs 表示右儿子 2i + 1
+
+// 小技巧：想选中一段区间可使用 sort(3 + all(x) - 4)
+#define all(x)  (x).begin(),  (x).end()   
+// 笔者更推荐 begin(x), end(x)
+#define rall(x) (x).rbegin(), (x).rend()
+
+// #x 将使用双引号包裹参数 x （MSVC 还有单引号的 #@）
+#define reopen(x) { freopen(#x&quot;.in&quot;, &quot;r&quot;, stdin); freopen(#x&quot;.out&quot;, &quot;w&quot;, stdout); }
+</code></pre>
+<p>使用 <code>#undef</code> 取消文本替换宏，意义为「仅在包裹的代码段落中执行替换」 。</p>
+<p>C++ 预定义了一些宏，它们会随着「情况」的不同发生改变。如 <code>__cplusplus</code> 指代当前语言标准，  <code>__LINE__</code> 将指代当前行，<code>__FUNC__</code> 将指代当前所在的函数。此处不作展开，详情请参见 <a href="https://en.cppreference.com/w/cpp/preprocessor/replace#Predefined_macros">cppreference 预定义宏</a>。配合这一点，可以写出一个简单的调试文本替换宏：</p>
+<pre><code class="language-cpp">#define here log(&quot;Passing [%s] in LINE %d\n&quot;, __FUNCTION__, __LINE__)
+// log 见下文输出调试信息处
+</code></pre>
+<h3 id="条件宏4"><a class="header" href="#条件宏4">条件宏<sup class="footnote-reference"><a href="#4">4</a></sup></a></h3>
+<div class="footnote-definition" id="4"><sup class="footnote-definition-label">4</sup>
+<p><a href="https://en.cppreference.com/w/cpp/preprocessor/conditional">https://en.cppreference.com/w/cpp/preprocessor/conditional</a></p>
+</div>
+<p><code>#ifdef</code>, <code>#else</code>, <code>#endif</code> 之类的宏操作会<b>在编译过程中</b>选择某些部分编译与否等等。</p>
+<p>在竞赛中最经典的使用是配合文件流重定向，在本机使用文件输入，而在 OJ 上使用标准读入。<b>大部分</b> OJ 都定义了 <code>ONLINE_JUDGE</code> 的宏，因此可以借此作为开关。</p>
+<pre><code class="language-cpp">#ifndef ONLINE_JUDGE
+  reopen(1); // 在上面已定义此宏。
+#endif
+</code></pre>
+<p>编译时附加 <code>-DLOCAL</code> 来定义一个名为 <code>LOCAL</code> 的宏。 </p>
+<h3 id="断言"><a class="header" href="#断言">断言</a></h3>
+<p>这并非一个函数，而是一个宏。接受一个表达式，若为假程序将直接退出，<u><i>十分</i></u>便于调试。</p>
+<p>例如，某区域是你永不希望到达的，你可以在此区域附加 <code>assert(false)</code>。也可使用 <code>__builtin_unreachable()</code> / <code>std::unreachable()</code><sup class="footnote-reference"><a href="#5">5</a></sup> 来标记不可达的区域。</p>
+<div class="footnote-definition" id="5"><sup class="footnote-definition-label">5</sup>
+<p><a href="https://en.cppreference.com/w/cpp/utility/unreachable">https://en.cppreference.com/w/cpp/utility/unreachable</a></p>
+</div>
+<p>有的 OJ 会屏蔽 <code>assert</code> (事实上宏 <code>NDEBUG</code> 决定之)，不过实现一个<sup class="footnote-reference"><a href="#6">6</a></sup>也很容易：</p>
+<div class="footnote-definition" id="6"><sup class="footnote-definition-label">6</sup>
+<p>这个宏参考了 f0re1gners 的模板库 <a href="https://f0re1gners.github.io/template/template.pdf">https://f0re1gners.github.io/template/template.pdf</a></p>
+</div>
+<pre><code class="language-cpp">#ifdef ONLINE_JUDGE
+#  define assert(condition) do if (!(condition)) exit(*(int*)0); while (0)
+#endif 
+</code></pre>
+<h2 id="-命名空间-7"><a class="header" href="#-命名空间-7">!~ 命名空间 <sup class="footnote-reference"><a href="#7">7</a></sup></a></h2>
+<div class="footnote-definition" id="7"><sup class="footnote-definition-label">7</sup>
+<p><a href="https://en.cppreference.com/w/cpp/language/namespace">https://en.cppreference.com/w/cpp/language/namespace</a></p>
+</div>
+<p><code>namespace</code> 是 C++ 中十分有效的解决命名冲突的手段。 假设现在要处理两段命名冲突的数据，将其命名为类似的名称<u>似乎</u>并没有想象中的美观。这种情况下，可以借助 <code>namespace</code> 将其包裹住。 </p>
+<pre><code class="language-cpp">int _hash[maxn], _hash_2[maxn];
+
+namespace L { int _hash[maxn]; }
+namespace R { int _hash[maxn]; }
+</code></pre>
+<p>使用时：<code>L::_hash[i]</code>, <code>R::_hash[i]</code> 。</p>
+<p>欲指代<u>全局的命名空间</u>（如 C 库函数），可直接使用 :: 打头，如 ::abs(a)。</p>
+<p>匿名的空间也是可行的，对于 namespace { int xxx; }  的访问可直接 ::xxx。</p>
+<p>C++ 标准库函数都位于 <code>std</code> 中，这意味着若要使用他们，则需 <code>std::xxx</code> 指代它们。不少竞赛选手常常喜欢使用一句<u>多为人诟病</u><sup class="footnote-reference"><a href="#8">8</a></sup>的 <code>using namespace std</code>，这句话将在全局引用 <code>std</code> 命名空间。</p>
+<div class="footnote-definition" id="8"><sup class="footnote-definition-label">8</sup>
+<p><a href="https://stackoverflow.com/questions/1452721/why-is-using-namespace-std-considered-bad-practice">https://stackoverflow.com/questions/1452721/why-is-using-namespace-std-considered-bad-practice</a></p>
+</div>
+<p>如果把 <code>ranges::views::iota_view</code> 比如文件路径 <code>/home/patricky/Downloads/files</code>，那么 <code>using namespace</code> 的意义就<u>如同</u>将其置于环境变量中，意味着你可随时随地使用其下的文件。<b>使用此方法之后，你应当更小心地使用变量名。</b></p>
+<p>另外一种<u>不错</u>的手段是，使用时再 <code>using</code>。如 <code>using std::cout</code> 之后即可 <code>cout &lt;&lt; &quot;Anything you want.&quot;</code> 了。</p>
+<p>说起来，如此<u>长</u>的命名空间 <code>std::ranges:views</code><i>(尽管它已被别名为 <code>std::views</code>)</i> 实在太不方便了，用下面的语法来给它起个别名：</p>
+<pre><code class="language-cpp">namespace NV = std::ranges::views;
+</code></pre>
+<h3 id="作用域----另一个解决命名冲突的方法"><a class="header" href="#作用域----另一个解决命名冲突的方法">作用域 -- 另一个解决命名冲突的方法</a></h3>
+<p>一个花括号围住的内容。</p>
+<pre><code class="language-cpp">int n = 1;
+{ 
+    using std::cout, std::cin; 
+    // C++17 开始可以一句话 using 多个目标
+    cout &lt;&lt; n &lt;&lt; &quot;\n&quot;; // 1
+    int n = 2;
+    cout &lt;&lt; n &lt;&lt; &quot;\n&quot;; // 2
+    cin &gt;&gt; n;
+}
+</code></pre>
+<h2 id="运算符的重载-9"><a class="header" href="#运算符的重载-9">运算符的重载 <sup class="footnote-reference"><a href="#9">9</a></sup></a></h2>
+<div class="footnote-definition" id="9"><sup class="footnote-definition-label">9</sup>
+<p><a href="https://en.cppreference.com/w/cpp/language/operators">https://en.cppreference.com/w/cpp/language/operators</a></p>
+</div>
+<p>简单说来就是将某函数绑定到某运算符上（优先级与之前一致），常见的如定义一个<u><i>不小<sup class="footnote-reference"><a href="#10">10</a></sup></i></u>的矩阵：</p>
+<div class="footnote-definition" id="10"><sup class="footnote-definition-label">10</sup>
+<p>小矩阵请直接使用 <code>array&lt;N, array&lt;int, N&gt;&gt;</code></p>
+</div>
+<pre><code class="language-cpp">template&lt;class T = int&gt;
+struct Matrix {
+    Matrix(int _r = {}, int _c = {}) : r{_r}, c{_c}, data(r * c) { }
+    T* operator[](int i) { return &amp; data[i * c]; }
+private:
+    int r, c;
+    vector&lt;T&gt; data;
+};
+</code></pre>
+<p>这样之后就可以对 <code>Matrix m(2, 2)</code> 使用 <code>m[1][0]</code> 了。 </p>
+<p>写一个比较器（通常是重载小于号）再传入 STL 容器中，这种时候，函数的头就十分重要：</p>
+<pre><code class="language-cpp">struct node {
+    int _val;
+    // 不一定需要有「小于」的意义。
+    bool operator&lt;(const node &amp;_) const { return _val &gt; _.val; }
+};
+</code></pre>
+<h3 id="仿函数--函子"><a class="header" href="#仿函数--函子">仿函数 / 函子</a></h3>
+<p>重载括号之后，使用括号运算符的感觉<u>就像是</u>函数一样。</p>
+<p>如果想用 <code>unordered_{, multi}{map, set}&lt;pair&lt;T1, T2&gt;, T3&gt;</code>，可以传一个仿函数进去，如 <code>unordered_map&lt;pair&lt;int,int&gt;,int, your_hash&gt;</code></p>
+<p>或直接特化 <code>hash</code>： </p>
+<pre><code class="language-cpp">template&lt;class T1, class T2&gt; 
+struct hash&lt;pair&lt;T1, T2&gt;&gt; {
+    size_t operator()(const pair&lt;T1, T2&gt; &amp;t) const {
+        return t.first ^ (t.second &lt;&lt; 1);
+    }
+};
+
+unordered_map&lt;pair&lt;int, int&gt;, int&gt; ump;
+</code></pre>
+<p>不过其实不如写一个函数将 <code>pair&lt;int, int&gt;</code> 先哈希一次，再用这个数字来哈希，详情请见： </p>
+<p><a href="https://codeforces.com/blog/entry/62393?#comment-464775">Blowing up unordered_map, and how to stop getting hacked on it - Codeforces</a></p>
+<h2 id="-lambda-表达式--匿名函数--闭包-11"><a class="header" href="#-lambda-表达式--匿名函数--闭包-11">* Lambda 表达式 / 匿名函数 / 闭包 <sup class="footnote-reference"><a href="#11">11</a></sup></a></h2>
+<div class="footnote-definition" id="11"><sup class="footnote-definition-label">11</sup>
+<p><a href="https://en.cppreference.com/w/cpp/language/lambda">https://en.cppreference.com/w/cpp/language/lambda</a></p>
+</div>
+<p>简单来说即「函数中的函数」，然而其类型<b><u>两两不同</u></b>（哪怕写的<u>一模一样</u>）。一个 <code>lambda</code> 表达式包含如下几个部分：</p>
+<pre><code class="language-cpp">[] // 捕获列表，包含两种捕获方式：按值（const）/引用。将会拷贝一份至 lambda 对应的类中。
+   // 如 [a] 表示按值捕获，[=] 表示「全部」按值捕获
+   // 而 [&amp;a] 则为按引用，[&amp;] 是其全称形式
+() // 参数列表，如果为空可以省略。
+各种说明符 // （可选）试图修改按值捕获的变量时应当使用 mutable
+          //       可以使用 -&gt; type 作为尾置返回类型的说明
+{} // 函数体
+</code></pre>
+<p>因此<u><i>最简单的</i></u> <code>lambda</code> 应当是：<code>[]{}</code>。为便于多次调用，可以使用 <code>auto</code> 自动推导其类型：</p>
+<pre><code class="language-cpp">auto sayHell = [] { cout &lt;&lt; &quot;Hell World!&quot;; };
+sayHell();
+</code></pre>
+<p>来看标准库在后续版本对 <code>lambda</code> 表达式做的一些加强：</p>
+<ol>
+<li>C++14 起：<code>lambda</code> 表达式可以是模板了，但只能通过在类型中写 <code>auto</code>。</li>
+</ol>
+<pre><code class="language-cpp">auto foo = [](auto cmp, auto a, auto b) {
+    cout &lt;&lt; (cmp(a, b) ? &quot;YES\n&quot; : &quot;NO\n&quot;);
+};
+
+// less_equal&lt;int&gt;{}
+foo([](int a, int b) { return a &lt;= b; }, 1, 2);
+</code></pre>
+<ol start="2">
+<li>C++14 起：带有捕获初始化的 <code>lambda</code>，可以在捕获的时候给初值了。</li>
+</ol>
+<pre><code class="language-cpp">//                      x ++ (错误，必须带等号)
+int x = 4, y = [&amp;z = x, x = x + 1] {
+    z += 2;
+    return x * x;
+} ();
+// x, y = 6, 25
+</code></pre>
+<p>这使得 <code>bind</code> 的使用场景越来越少。</p>
+<ol start="3">
+<li>今天的 <code>lambda</code>：若干 <code>this</code> / <code>*this</code>，支持 <code>&lt;&gt;</code> 定义模板 <code>lambda</code> 了等等，此处从略。</li>
+</ol>
+<hr />
+<p>来写个递归的 <code>lambda</code> （尽管 C++23 可以 <code>this auto self</code> 了）：</p>
+<pre><code class="language-cpp">auto fib = [](auto &amp;&amp;self, int n) -&gt; int { 
+    return n &lt;= 2 ? 1 : self(self, n - 1) + self(self, n - 2); 
+};
+
+fib(fib, 5);
+</code></pre>
+<p>配合上述 C++14 特性，可以写一个即刻调用的版本：</p>
+<pre><code class="language-cpp">[&amp;, fib{[&amp;](auto &amp;&amp;self, int n) -&gt; int {
+    return n &lt;= 2 ? 1 : self(self, n - 1) + self(self, n - 2);     
+}}] { return fib(fib, 5); };
+</code></pre>
+<p>这样写<u><i>有点</i></u>麻烦，这主要是因为写下 <code>fib</code> 这名字时类型未定，如果有个什么工具标注一下类型就<u><i>好</i></u>了，有请 —— </p>
+<h2 id="函数对象-function"><a class="header" href="#函数对象-function">函数对象 function</a></h2>
+<p><code>function</code> 能够接受若干「可执行的对象」<sup class="footnote-reference"><a href="#12">12</a></sup><sup class="footnote-reference"><a href="#13">13</a></sup>。</p>
+<div class="footnote-definition" id="12"><sup class="footnote-definition-label">12</sup>
+<p><a href="https://en.cppreference.com/w/cpp/named_req/Callable">https://en.cppreference.com/w/cpp/named_req/Callable</a>
+<sup class="footnote-reference"><a href="#13">13</a></sup>: <a href="https://en.cppreference.com/w/cpp/utility/functional">https://en.cppreference.com/w/cpp/utility/functional</a></p>
+</div>
+<p>对于上面的例子，依然需要在定义时给出类型以及返回值：</p>
+<pre><code class="language-cpp">function&lt;int(int)&gt; fib = [&amp;fib](int n) -&gt; int { 
+    return n &lt;= 2 ? 1 : fib(n - 1) + fib(n - 2); 
+};
+
+cout &lt;&lt; fib(5);
+</code></pre>
+<p>其他时候的 <code>function</code> 就自由得多。下面的例子演示了如何使用 <code>function</code> 存储单个参数的三个函数。</p>
+<pre><code class="language-cpp">#include &lt;functional&gt;
+
+void anything(int = 1) { }
+
+auto main() -&gt; int {
+    function foo = [](int = 1) {};
+
+    foo = anything;
+
+    namespace NP = placeholders;
+    foo = bind(greater&lt;int&gt;{}, 1, NP::_1);
+
+    return {};
+}
+</code></pre>
+<h2 id="折叠表达式-14"><a class="header" href="#折叠表达式-14">折叠表达式 <sup class="footnote-reference"><a href="#14">14</a></sup></a></h2>
+<div class="footnote-definition" id="14"><sup class="footnote-definition-label">14</sup>
+<p><a href="https://en.cppreference.com/w/cpp/language/fold">https://en.cppreference.com/w/cpp/language/fold</a></p>
+</div>
+<p><b>要使用这一特性，请使用 C++17 及以上语言版本。</b></p>
+<p>此处不展开了，本身是个<u><i>不太复杂</i></u>语法。来看两个笔者常用的简单功能：</p>
+<h3 id="输出-tuple"><a class="header" href="#输出-tuple">输出 tuple</a></h3>
+<p><code>apply(a, t)</code> 将会把 <code>t</code> 拆包作为「可运行的」<code>a</code> 的参数，另外逗号表达式严格自左向右执行，算是这段代码中最有技巧性的部分。</p>
+<pre><code class="language-cpp">template &lt;typename... Ts&gt;
+ostream&amp; operator&lt;&lt; (ostream &amp;os, const tuple&lt;Ts...&gt; &amp;tp) {
+    apply([&amp;os](const auto &amp;...args) { ((os &lt;&lt; args &lt;&lt; &quot; &quot;), ...); }, tp);
+    return os;
+}
+// ...
+cout &lt;&lt; tuple{1, 1.F, &quot;anything&quot;, tuple{1, 2, 3, &quot;hello&quot;}};
+</code></pre>
+<h3 id="输出调试信息"><a class="header" href="#输出调试信息">输出调试信息</a></h3>
+<p>为了利用众所周知的 <code>cerr</code><sup class="footnote-reference"><a href="#15">15</a></sup> 与 <code>clog</code><sup class="footnote-reference"><a href="#16">16</a></sup>，来写一个函数：</p>
+<div class="footnote-definition" id="15"><sup class="footnote-definition-label">15</sup>
+<p><a href="https://en.cppreference.com/w/cpp/io/cerr">https://en.cppreference.com/w/cpp/io/cerr</a>
+<sup class="footnote-reference"><a href="#16">16</a></sup>: <a href="https://en.cppreference.com/w/cpp/io/clog">https://en.cppreference.com/w/cpp/io/clog</a></p>
+</div>
+<pre><code class="language-cpp">template &lt;typename... Args&gt;
+#ifndef ONLINE_JUDGE
+void log(const Args &amp;...args) { ((cerr &lt;&lt; args &lt;&lt; &quot;, &quot;), ...); }
+#else 
+void log([[maybe_unused]] const Args &amp;...args) { }
+#endif
+
+log(__LINE__, &quot;ans = &quot;, ans, &quot;-----\n&quot;);
+</code></pre>
+<p>其中包含 C++17 引入的 <code>[[maybe_unused]]</code> 能让编译器对没有使用的参数「闭嘴」。</p>
+<p>什么？你更喜欢古老的 <code>printf</code> 系列？请用（略去了条件编译）： </p>
+<pre><code class="language-cpp">#define log(fmt, args...) fprintf(stderr, fmt, ##args)
+
+log(&quot;Reached [%d], ans = %lld&quot;, __LINE__, ans);
+</code></pre>
+<h2 id="节省或浪费生命的小玩意"><a class="header" href="#节省或浪费生命的小玩意">节省或浪费生命的小玩意</a></h2>
+<p>这一部分将介绍一些笔者认为十分方便的语法、工具。</p>
+<h3 id="超短的小语法位运算等"><a class="header" href="#超短的小语法位运算等">超短的小语法、位运算等</a></h3>
+<pre><code class="language-cpp">exit(0)  // 在任意位置结束程序，然后去世
+
+0X3F // 十六进制
+077  // 八进制
+0B11 // 二进制（C++14）
+1'000'000'007 // 分隔符（C++14）
+
+!!x; // 为 1 表示 x 不是 0
+!x;  // 与上面相反
+~x;  // 有符号数 x 不是 -1 （这是因为 -1 补码全 1） 
+~0U  // 大数
+ (x &amp; 1)   // 为 1 表示 x 是奇数  a + b &amp; 1 判定的是 (a + b) 整体
+(~x &amp; 1)   // 与上面相反，但如果使用等价的 (x &amp; 1 ^ 1) 则会报警告
+(x &gt;&gt; 1)   // x / 2 取下整（而并非 / 2 表现为向零取整）
+(x &lt;&lt; 1)   // x * 2       当心溢出
+           // x * 10 = x * 8 + x * 2 = (x &lt;&lt; 3) + (x &lt;&lt; 1)
+           // 一个自作聪明的小技巧
+
+x &amp; -x       // lowbit   =&gt; 易知 lowbit(x) == x 的数或为 0 或为 power(2, k)
+x &amp; (x - 1)  // 最低位归零 =&gt; 易知 (x &amp; (x - 1)) == 0 意义同上
+
+(1LL &lt;&lt; x) // power(2, x) 当心溢出
+__lg(x) // 二进制长度 （这里要提一下 __builtin_ 一族了）
+// 参见 https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html 
+// 以及 C++ 20 头文件 &lt;bit&gt;
+
+&quot;3124&quot;[x] // 输出这个 const char[5] 中 x 下标对应的字符 当心越界
+          // 通常用作 &quot; \n&quot;[i == n]
+
+(i &amp; 1 ? odd : even).push_back(x);     // 三目运算符真好用
+set(A.begin(), A.end()).size(); // A 中的元素种类数
+</code></pre>
+<h3 id="一些常用的循环"><a class="header" href="#一些常用的循环">一些常用的循环</a></h3>
+<h4 id="枚举所有状态"><a class="header" href="#枚举所有状态">枚举所有状态</a></h4>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">n</span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span></p>
+<pre><code class="language-cpp">for (int i = 0; i &lt; 1 &lt;&lt; n; ++i) {
+    for (int j = 0; j &lt; n; ++j) {
+        if (i &gt;&gt; j &amp; 1) {
+          // selected j
+        }
+    }
+}
+</code></pre>
+<h4 id="枚举子集"><a class="header" href="#枚举子集">枚举子集</a></h4>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.238em;vertical-align:-0.35em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.888em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mop mtight"><span class="mord mathrm mtight">popcount</span></span><span class="mopen mtight">(</span><span class="mord mathnormal mtight">n</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span></span></span></span></p>
+<pre><code class="language-cpp">for (auto i = s; i; --i &amp;= s) { } // 从大到小
+// 使用 s - i 就是从小到大。另外上面没算空集，额外判下
+</code></pre>
+<h4 id="枚举-n-个选-k-个的集合"><a class="header" href="#枚举-n-个选-k-个的集合">枚举 n 个选 k 个的集合</a></h4>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:2.4em;vertical-align:-0.95em;"></span><span class="mord"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size3">(</span></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.1076em;"><span style="top:-2.314em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span><span style="top:-3.677em;"><span class="pstrut" style="height:3em;"></span><span class="mord"><span class="mord mathnormal">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em;"><span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size3">)</span></span></span></span></span></span></p>
+<pre><code class="language-cpp">for (int t = (1 &lt;&lt; k) - 1, x, y; t &lt; 1 &lt;&lt; n; t = ((t &amp; ~y) / x &gt;&gt; 1) | y) {
+    f(t);
+    y = t + (x = t &amp; -t);
+}
+</code></pre>
+<h4 id="枚举倍数"><a class="header" href="#枚举倍数">枚举倍数</a></h4>
+<p><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mclose">)</span></span></span></span></p>
+<pre><code class="language-cpp">for (int j = i + i; j &lt;= N; j += i) { }
+</code></pre>
+<h3 id="输出变量的类型"><a class="header" href="#输出变量的类型">输出变量的类型</a></h3>
+<p>一个<u><i>看似很有用的</i></u>东西。</p>
+<pre><code class="language-cpp">#include &lt;cxxabi.h&gt;
+// ...
+cout &lt;&lt; abi::__cxa_demangle(typeid(x).name(), {}, {}, {}) &lt;&lt; &quot;\n&quot;;
+</code></pre>
+<h3 id="y-组合子--即刻使用的递归-lambda"><a class="header" href="#y-组合子--即刻使用的递归-lambda">y 组合子 —— 即刻使用的递归 lambda</a></h3>
+<p>选自 <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0200r0.html">A Proposal to Add Y Combinator to the Standard Library</a> <sup class="footnote-reference"><a href="#32">17</a></sup>。</p>
+<div class="footnote-definition" id="32"><sup class="footnote-definition-label">17</sup>
+<p>&quot;这段代码具体什么意思？&quot; https://riptutorial.com/cplusplus/example/8508/recursive-lambdas</p>
+</div>
+<pre><code class="language-cpp">template &lt;class Fun&gt; struct y_combinator_result {
+  Fun fun_;
+  template &lt;class T&gt;
+  explicit y_combinator_result(T &amp;&amp;fun) : fun_(::std::forward&lt;T&gt;(fun)) {}
+  template &lt;class... Args&gt; decltype(auto) operator()(Args &amp;&amp;...args) {
+    return fun_(::std::ref(*this), ::std::forward&lt;Args&gt;(args)...);
+  }
+};
+
+template &lt;class Fun&gt; decltype(auto) y_combinator(Fun &amp;&amp;fun) {
+  return y_combinator_result&lt;::std::decay_t&lt;Fun&gt;&gt;(::std::forward&lt;Fun&gt;(fun));
+}
+</code></pre>
+<p>使用案例：</p>
+<pre><code class="language-cpp">cout &lt;&lt; y_combinator([&amp;](auto &amp;&amp;gcd, int a, int b) -&gt; int {
+    return !b ? a : gcd(b, a % b);
+})(10, 20) &lt;&lt; &quot;\n&quot;;
+</code></pre>
+<p>或者多次使用：</p>
+<pre><code class="language-cpp">auto gcd = y_combinator([&amp;](auto &amp;&amp;gcd, int a, int b) -&gt; int {
+    return !b ? a : gcd(b, a % b);
+});
+
+gcd(10, 20);
+gcd(11, 11);
+</code></pre>
+<p><em>上述案例仅用于了解如何使用该语法。实际操作请使用 <code>std::__gcd</code> 或 <code>std::gcd</code>（C++17）。</em></p>
+<h3 id="高维-vector"><a class="header" href="#高维-vector">高维 vector</a></h3>
+<p>尽管根据 <b>CTAD</b>，C++17 开始可使用 <code>vector graph(n, vector(n, 0))</code> 来定义一个 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 的 <code>vector</code>，但当维数更多时，这种方法依然<u><i>不够</i></u>简洁。在 C++23 还未普及之前，<u>下面的方法</u><sup class="footnote-reference"><a href="#17">18</a></sup>也相当不错：</p>
+<div class="footnote-definition" id="17"><sup class="footnote-definition-label">18</sup>
+<p>这方法取自 <a href="https://codeforces.com/blog/entry/76149?#comment-606512">https://codeforces.com/blog/entry/76149?#comment-606512</a></p>
+</div>
+<pre><code class="language-cpp">template &lt;class... Args&gt; 
+auto ndvector(size_t n, Args &amp;&amp;...args) {
+  if constexpr (sizeof...(args) == 1) {
+    return vector(n, args...);
+  } else {
+    return vector(n, ndvector(args...));
+  }
+}
+</code></pre>
+<pre><code class="language-cpp">// 维数越多越明显，但一般也就四维撑死了～
+{ vector g(n + 1, vector(m + 1, vector(c + 1, 0X3F3F3F3F))); }
+{ using vector; vector g(n + 1, vector(m + 1, vector(c + 1, 0X3F3F3F3F))); }
+{ auto g = ndvector&lt;int&gt;(n + 1, m + 1, c + 1, 0X3F3F3F3F); }
+
+// 造一个超级高维的 vector：
+auto x = ndvector(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+</code></pre>
+<p>上面这个 <code>x</code> 展开是什么类型<sup class="footnote-reference"><a href="#18">19</a></sup>？无需在意。总之，<u><i>都</i></u>让编译器忙活去吧！</p>
+<div class="footnote-definition" id="18"><sup class="footnote-definition-label">19</sup>
+<p><a href="http://fars.ee/EsZ2">http://fars.ee/EsZ2</a></p>
+</div>
+<h2 id="语法项"><a class="header" href="#语法项">语法项</a></h2>
+<h3 id="范围-for-20"><a class="header" href="#范围-for-20">范围 for <sup class="footnote-reference"><a href="#19">20</a></sup></a></h3>
+<div class="footnote-definition" id="19"><sup class="footnote-definition-label">20</sup>
+<p><a href="https://en.cppreference.com/w/cpp/language/range-for">https://en.cppreference.com/w/cpp/language/range-for</a></p>
+</div>
+<p>如，遍历一个 <code>set&lt;int&gt;</code> 在 C++11 之前使用迭代器：</p>
+<pre><code class="language-cpp">static const int a[] = {1, 2, 3, 4, 5};
+
+set&lt;int&gt; s(a, a + 5);
+// C++11 可以 s{1, 2, 3, 4, 5}; 来初始化
+//      也可以将下面 it 的类型写成 auto
+
+for (set&lt;int&gt;::iterator it = s.begin(); it != s.end(); it ++) {
+   cout &lt;&lt; *it &lt;&lt; &quot;\n&quot;;
+}
+</code></pre>
+<p>在 C++11 使用 <code>for (int i : s)</code> 即可。在 C++20 还可在 <code>for</code> 中再定义一些变量：</p>
+<pre><code class="language-cpp">for (auto S = &quot;Hi!&quot;; const auto i : s) { }
+
+// 一些其他的小技巧
+for (int i : {1, 2, 3, 4, 5}) { } 
+
+vector a(n, 0); // CTAD
+for (int &amp;i : a) { cin &gt;&gt; i; }
+
+vector p(m, pair{0, 0});
+for (auto &amp;[x, y] : p) {
+    cin &gt;&gt; x &gt;&gt; y;
+}
+</code></pre>
+<h3 id="if--switch-中定义变量-21"><a class="header" href="#if--switch-中定义变量-21">if / switch 中定义变量 <sup class="footnote-reference"><a href="#20">21</a></sup></a></h3>
+<div class="footnote-definition" id="20"><sup class="footnote-definition-label">21</sup>
+<p><a href="https://en.cppreference.com/w/cpp/language/if">https://en.cppreference.com/w/cpp/language/if</a></p>
+</div>
+<p><b>要使用这一特性，请使用 C++17 及以上语言版本。</b></p>
+<p>从语义上来说，确实更方便了，但也许会部分编码者抓狂。</p>
+<pre><code class="language-cpp">if (int op = read(); op == 1) {
+    // ...
+}  else if (op == 2) {
+    // ...
+}
+</code></pre>
+<h3 id="auto22-初始化23-ctad24-结构化绑定25等"><a class="header" href="#auto22-初始化23-ctad24-结构化绑定25等">auto<sup class="footnote-reference"><a href="#21">22</a></sup>, 初始化<sup class="footnote-reference"><a href="#22">23</a></sup>, CTAD<sup class="footnote-reference"><a href="#23">24</a></sup>, 结构化绑定<sup class="footnote-reference"><a href="#24">25</a></sup>等</a></h3>
+<div class="footnote-definition" id="21"><sup class="footnote-definition-label">22</sup>
+<p><a href="https://en.cppreference.com/w/cpp/keyword/auto">https://en.cppreference.com/w/cpp/keyword/auto</a>
+<sup class="footnote-reference"><a href="#22">23</a></sup>: <a href="https://en.cppreference.com/w/cpp/language/list_initialization">https://en.cppreference.com/w/cpp/language/list_initialization</a>
+<sup class="footnote-reference"><a href="#23">24</a></sup>: <a href="https://en.cppreference.com/w/cpp/language/class_template_argument_deduction">https://en.cppreference.com/w/cpp/language/class_template_argument_deduction</a>
+<sup class="footnote-reference"><a href="#24">25</a></sup>: <a href="https://en.cppreference.com/w/cpp/language/structured_binding">https://en.cppreference.com/w/cpp/language/structured_binding</a></p>
+</div>
+<p>C++11 的到来使得这个语言充满活力，尤其是 <code>auto</code> 的拓展。聚合（或其他）初始化则更加配合这一点，一些经典的例子是：</p>
+<pre><code class="language-cpp">auto /*占位*/ do_nothing = []{}; // 承载 lambda
+
+template&lt;class T&gt;
+auto sum_up(T a, T b) { return a + b; }
+// C++20 简写模板可写的更简洁
+
+int arr[10]{}; // 初始化
+
+auto main() -&gt; int { }
+
+// initializer_list&lt;int&gt; 
+// C++17 起这里一定带等号
+auto init_list = { 1, 2, 3, 4, };
+
+decltype(b) a;
+</code></pre>
+<p>配合后续版本增加的特性，<code>auto</code> 更为通用： </p>
+<h3 id="结构化绑定"><a class="header" href="#结构化绑定">结构化绑定</a></h3>
+<p><b>要使用这一特性，请使用 C++17 及以上语言版本。</b></p>
+<p>绑定数组、<code>tuple-like</code>、或者只是一个普通的结构体：</p>
+<pre><code class="language-cpp">static int arr[] = { 1, 2, 3, 4 };
+auto &amp;[a, b, c, d] = arr;
+c++;
+
+const auto [x, y, _] = tuple{1, &quot;anything&quot;, 1.F}; // CTAD
+
+struct point  { int x, y; };
+auto [x, y] = point{1, 1}; 
+// 然而笔者感到遗憾的是，还不支持形如 auto [[x, y], r] 的语法 
+</code></pre>
+<h3 id="ctad"><a class="header" href="#ctad">CTAD</a></h3>
+<p><b>要使用这一特性，请使用 C++17 及以上语言版本。</b></p>
+<p>再也不需要写全类型了，如 <code>pair&lt;int, double&gt; t { 1, 1. }</code> 可直接写为 <code>pair t{ 1, 1. }</code> <sup class="footnote-reference"><a href="#25">26</a></sup></p>
+<div class="footnote-definition" id="25"><sup class="footnote-definition-label">26</sup>
+<p><code>1.</code> 是 <code>double</code> 类型而 <code>1.F</code> 是 <code>float</code> 类型</p>
+</div>
+<p>而 <code>vector&lt;vector&lt;int&gt;&gt; a(n)</code> 也可写为 <code>vector a(n, vector(0, 0))</code></p>
+<pre><code class="language-cpp">for (auto [dx, dy] : {pair{0, 1}, {0, -1}, {1, 0}, {-1, 0}}) {
+    int x = dx + px, y = dy + py;
+} // 遍历方向
+
+auto mp = map{pair{1, 1}, {2, 1}, {-1, 1}};
+</code></pre>
+<h3 id="输入一行带空格的字符串-27"><a class="header" href="#输入一行带空格的字符串-27">输入一行带空格的字符串 <sup class="footnote-reference"><a href="#26">27</a></sup></a></h3>
+<div class="footnote-definition" id="26"><sup class="footnote-definition-label">27</sup>
+<p><a href="https://en.cppreference.com/w/cpp/string/basic_string/getline">https://en.cppreference.com/w/cpp/string/basic_string/getline</a></p>
+</div>
+<p>对一个 <code>char[]</code> 可使用正则表达式 <code>scanf(&quot; %[^\n]&quot;, str)</code>。<sup class="footnote-reference"><a href="#27">28</a></sup></p>
+<div class="footnote-definition" id="27"><sup class="footnote-definition-label">28</sup>
+<p><a href="https://en.cppreference.com/w/c/io/fscanf">https://en.cppreference.com/w/c/io/fscanf</a></p>
+</div>
+<pre><code class="language-cpp">string s;
+getline(cin, s); 
+</code></pre>
+<p>注意会吃掉 <code>'\n'</code> 。读者可尝试以下代码：</p>
+<pre><code>int foo; 
+cin &gt;&gt; foo;
+
+// cin.ignore();
+string s;
+getline(cin, s);
+cout &lt;&lt; quoted(s) &lt;&lt; &quot;\n&quot;; 
+</code></pre>
+<h3 id="多个字符串黏起来的字符串"><a class="header" href="#多个字符串黏起来的字符串">多个字符串黏起来的字符串</a></h3>
+<p>当你的代码中出现了一行很长的字符串，你可以将它们分隔开来，就像这样：</p>
+<pre><code class="language-cpp">const char *str = &quot;Hey! &quot;
+  &quot;What? You have a new line! &quot;
+  &quot;How you did that? &quot;;
+</code></pre>
+<h3 id="原始字符串-29"><a class="header" href="#原始字符串-29">原始字符串 <sup class="footnote-reference"><a href="#28">29</a></sup></a></h3>
+<div class="footnote-definition" id="28"><sup class="footnote-definition-label">29</sup>
+<p><a href="https://en.cppreference.com/w/cpp/language/string_literal">https://en.cppreference.com/w/cpp/language/string_literal</a></p>
+</div>
+<p>不处理转义字符的字符串。</p>
+<pre><code class="language-cpp">string raw = R&quot;(\n\r\b\t\
+
+这些换行也不处理 ...
+
+)&quot;;
+</code></pre>
+<h2 id="一些好用的-stl-类30函数"><a class="header" href="#一些好用的-stl-类30函数">一些好用的 STL 类<sup class="footnote-reference"><a href="#29">30</a></sup>/函数</a></h2>
+<div class="footnote-definition" id="29"><sup class="footnote-definition-label">30</sup>
+<p>为什么没有 pbds? 我实在是太懒了 ...</p>
+</div>
+<h3 id="排序乱序等"><a class="header" href="#排序乱序等">排序、乱序等</a></h3>
+<h4 id="排序"><a class="header" href="#排序">排序</a></h4>
+<pre><code class="language-cpp">sort(A.begin(), A.end());
+sort(A.rbegin(), A.rend()); // 反着排
+
+sort(A.begin(), A.end(), [](auto &amp;a, auto &amp;b) {
+    return ::abs(a) &lt; ::abs(b);
+});
+</code></pre>
+<h4 id="已经有序"><a class="header" href="#已经有序">已经有序</a></h4>
+<pre><code class="language-cpp">is_sorted(A.begin(), A.end()); // 非严格升序
+is_sorted(A.begin(), A.end(), less_equal&lt;&gt;{}); // 严格升序
+</code></pre>
+<h4 id="乱序"><a class="header" href="#乱序">乱序</a></h4>
+<p>自 C++17 起 <code>random_shuffle</code> 被弃用，现在使用 <code>shuffle</code> 。</p>
+<pre><code class="language-cpp">vector a {-6, 1, 2, 3, 4, 4, 5};
+mt19937 rng{
+    chrono::steady_clock::now()
+    .time_since_epoch()
+    .count()
+};
+// 传 time(nullptr) 亦可
+shuffle(a.begin(), a.end(), rng);
+</code></pre>
+<p><i>顺便看看 <code>stable_sort</code></i></p>
+<h3 id="创建一个排列"><a class="header" href="#创建一个排列">创建一个排列</a></h3>
+<pre><code class="language-cpp">iota(A.begin(), A.end(), 1); // 1, 2, 3, ...
+iota(A.rbegin(), A.rend(), 0); // n - 1, n - 2, ..., 2, 1, 0
+</code></pre>
+<h3 id="累积-accumulate"><a class="header" href="#累积-accumulate">累积 accumulate</a></h3>
+<p>求和/积、或者是其他操作，下面是两个例子：</p>
+<pre><code class="language-cpp">accumulate(A.begin(), A.end(), 0LL); 
+// 注意不要传入 0 使用 int+ 带来不该的溢出
+accumulate(A.begin(), A.end(), 0, bit_xor&lt;int&gt;{}); // 异或和
+</code></pre>
+<h3 id="求最值"><a class="header" href="#求最值">求最值</a></h3>
+<p><code>m{in{, max}, ax}{_element}</code> 都可以传比较器，如 <code>min(a, b, cmp)</code></p>
+<p>有的时候是不同类型做操作，可以追加类型：<code>min&lt;long long&gt;(0, b)</code></p>
+<p>可以传 <code>initializer_list</code>，如 <code>max({a, b, c, d, ...})</code> 不过这实际上也是<u><i>非常</i></u>蛋疼的一点 ，意味着 <code>min</code> 是二义性的，想封装一个 <b>Sparse Table</b> 板子的话需要注意这一点。 </p>
+<pre><code class="language-cpp">max(max(max(a, b), c), d);
+max({a, b, c, d});
+
+// initializer_list
+auto A = {-6, 1, 2, 3, 4, 4, 5};
+auto [m, M] = minmax(A);
+
+tie(m, M) = minmax({ i, i * m, i * M });
+</code></pre>
+<h3 id="离散化"><a class="header" href="#离散化">离散化</a></h3>
+<pre><code class="language-cpp">sort(A.begin(), A.end());
+A.resize(unique(A.begin(), A.end()) - begin(A));
+</code></pre>
+<pre><code class="language-cpp">sort(c + 1, c + 1 + tot);
+tot = unique(c + 1, c + 1 + tot) - (c + 1);
+for (int i = 1; i &lt;= n; ++i) {
+    a[i] = lower_bound(c + 1, c + 1 + tot, a[i]) - c;
+}
+</code></pre>
+<h3 id="其他"><a class="header" href="#其他">其他</a></h3>
+<p>包括但不限于 </p>
+<pre><code class="language-cpp">count{, _if}()
+generate{, _n}()
+fill{, _n}()
+copy{, _if}()
+{lower, upper }_bound()
+equal_range()
+binary_search()
+nth_element()
+partial_sum()
+adjacent_difference()
+{, inplace_}merge()
+reverse()
+mismatch()
+rotate()
+__gcd()
+gcd() (C++17)
+lcm() (C++17)
+inner_product()
+transform()
+{all, any, none}_of()
+{is, next, prev}_permutation()
+basic_string
+</code></pre>
+<p>效率不是非常高的（甚至可以说很差）：</p>
+<pre><code class="language-cpp">valarray
+regex
+complex (这个算吗...)
+</code></pre>
+<h3 id="-其他注意事项"><a class="header" href="#-其他注意事项">* 其他注意事项</a></h3>
+<ol>
+<li>
+<p>I/O <code>cin.tie(nullptr)-&gt;sync_with_stdio(false)</code>。具体原因可直接百度或查看 <a href="https://en.cppreference.com/w/cpp/io/ios_base/sync_with_stdio"><code>cppreference ios_base::sync_with_stdio</code></a> 以及 <code>cin</code> 相关文档。看完这些，读者也应同时理解了为什么 <code>endl</code> 那样「慢」。</p>
+</li>
+<li>
+<p><code>vector::iterator</code> 可以直接当作指针用。（<code>RandomAccessIterator</code>），比如 <code>V.end()[-1]</code>, <code>V.rbegin()[0]</code>。本质上就是 <code>i[x]</code> 等价于 <code>*(i + x)</code>。</p>
+</li>
+<li>
+<p>知道 <code>vector</code> 的大小，要么直接开，要么先 <code>reserve</code> 一下再 <code>{push, emplace}_back</code> </p>
+</li>
+<li>
+<p><code>vector</code> 的 <code>resize / clear</code> 方法之后，记得 <code>shrink_to_fit</code>。<sup class="footnote-reference"><a href="#30">31</a></sup></p>
+</li>
+<li>
+<p>一些没有 <code>clear()</code> 成员方法的容器（<code>queue</code>, <code>stack</code>, <code>...</code>）可以 <code>decltype(cap){}.swap(cap)</code> 流放之。</p>
+</li>
+<li>
+<p>除 <code>array</code> 外，所有容器的 <code>swap</code> 方法都是 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mord">1</span><span class="mclose">)</span></span></span></span> 的。</p>
+</li>
+<li>
+<p>在栈上定义的 <code>array</code> 开在栈上，而 <code>vector</code> 对象开在栈上，数据开在堆上。 </p>
+</li>
+<li>
+<p>注意该不该引用（能不能用右值引用续命），能不能移动（如果可以尽可能使用 <code>move</code>）</p>
+</li>
+<li>
+<p><code>multi{set, map}::count</code> 的复杂度是 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span></span></span></span> 出现次数 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">+</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span> ，而 C++20 的 <code>contains</code> 则是 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathcal" style="margin-right:0.02778em;">O</span><span class="mopen">(</span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal">n</span><span class="mclose">)</span></span></span></span></p>
+</li>
+<li>
+<p><code>size_t</code> 类型应强转，或使用 C++20 的 <code>ssize()</code> 获取长度。</p>
+</li>
+<li>
+<p>用迭代器边遍历 <code>set</code> 边删除迭代器时应使用 <code>it = S.erase(it)</code> 来代替 <code>it ++</code>。也就是</p>
+<pre><code class="language-cpp">for (auto it = s.begin(); it != s.end(); ) {
+  if (!judge(*it)) {
+    it = s.erase(it);
+  } else {
+    it ++;
+  }
+}
+</code></pre>
+</li>
+<li>
+<p><code>set::merge(t)</code> 是直接把不同于两集合的元素从 <code>t</code> 直接薅走，意义与 <code>set::insert(t.begin(), t.end())</code> 不总一样。</p>
+</li>
+</ol>
+<div class="footnote-definition" id="30"><sup class="footnote-definition-label">31</sup>
+<p><a href="https://en.cppreference.com/w/cpp/container/vector/shrink_to_fit">https://en.cppreference.com/w/cpp/container/vector/shrink_to_fit</a></p>
+</div>
+<p><i>这个条目等我下次破防再更新</i></p>
+<h2 id="本文即将移除的条目"><a class="header" href="#本文即将移除的条目">本文即将移除的条目</a></h2>
+<h3 id="程序计时"><a class="header" href="#程序计时">程序计时</a></h3>
+<p>笔者一直主观不赞成将计时嵌入至代码的行为，只是单文件、单元测试，完全可以使用系统的计时工具：</p>
+<pre><code class="language-zsh">time
+</code></pre>
+<pre><code class="language-powershell">(Measure-Command {xxx | Out-Default}).ToString()
+Measure-Command {cat 1.in | .\A | Out-Default} | findstr TotalMilliseconds
+</code></pre>
+<p><img src="https://picx.zhimg.com/80/v2-f9da1419ab0b7fc9c79062ec59619a38_720w.png?source=d16d100b" alt="" /></p>
+<h2 id="后记致谢贴贴"><a class="header" href="#后记致谢贴贴">后记、致谢、贴贴</a></h2>
+<ul>
+<li>感谢 <a href="https://www.zhihu.com/people/newlzc">@MeteorZ</a>  对 「判断是二的幂」 做的 「特判 0 」 补充。</li>
+<li>感谢 <a href="https://www.zhihu.com/people/test-76-72-74">@Lhgzbxhz</a> 对「断言」做的「<code>__builtin_unreachable()</code>」补充。</li>
+<li>感谢 <a href="https://www.zhihu.com/people/tyl-11-17">@阿汤</a>  对「判断是二的幂」做的「<code>(x&amp;(x-1))==0</code>」补充。</li>
+<li>感谢 <a href="https://www.zhihu.com/people/qing-kuang-shu-sheng-17-32">@轻狂书生</a> 对「程序计时」做的催更。</li>
+<li>感谢 <a href="https://www.zhihu.com/people/soulmate-66-60">@soulmate</a> 对删除「异常处理」与「<code>std::regex</code>」内容的建议。</li>
+<li>感谢 <a href="https://gist.github.com/Patricky-Tau/8d3ffbf51196546028041647cafc7bf2?permalink_comment_id=4237886#gistcomment-4237886">@n-WN</a> 对「预定义宏」的补充。</li>
+</ul>
+<h2 id="changelog"><a class="header" href="#changelog">changelog</a></h2>
+<p>UPD: 本文已经从「算法竞赛中常用的语法操作」重命名为 「算法竞赛中的 C++ 语法操作」。</p>
+<p>UPD(22-09-16):  这次更新给每一个条目都加上了 cppreference 的链接（如果有）并重新规划了文章结构。</p>
+<p>UPD(22-09-30): 移除了「一些位运算」条目。增加了 y 组合子。</p>
+<p>UPD(23-04-10): 纠正了 C++14 lambda 相关描述，增加了一个即刻调用的递归 lambda 写法。并附上了本文的 markdown 版本。能坚持到现在真是一个奇迹，希望下次更新不会太久。</p>
 
                     </main>
 
@@ -147,7 +848,7 @@
                             <a rel="prev" href="../lang/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                            <a rel="next" href="../lang/stl.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../train/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         <div style="clear: both"></div>
@@ -159,7 +860,7 @@
                     <a rel="prev" href="../lang/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                    <a rel="next" href="../lang/stl.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../train/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
