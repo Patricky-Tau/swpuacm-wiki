@@ -164,7 +164,7 @@ int n = 1;
 
 简单说来就是将某函数绑定到某运算符上（优先级与之前一致），常见的如定义一个<u><i>不小[^10]</i></u>的矩阵：
 
-[^10]: 小矩阵请直接使用 `array<N, array<int, N>>`
+[^10]: 小矩阵请直接使用 `array<array<int, N>, N>`
 
 ```cpp
 template<class T = int>
