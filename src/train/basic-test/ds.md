@@ -62,7 +62,7 @@ int main() {
 >
 > $n \leq 2 \cdot 10^5, 0 \leq a_i \leq 10^9$
 
-树状数组模板题，拆成三个条件 $a_i \lt i, a_j \lt j, a_i \lt a_j$。
+树状数组模板题，拆成三个条件 $a_i \gt i, a_j \gt j, a_i \lt a_j$。
 
 <details><summary>展开代码</summary>
 
