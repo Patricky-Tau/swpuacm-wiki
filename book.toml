@@ -25,11 +25,11 @@ no-section-label    = true
 # deploy
 cname               = "wiki.swpuacm.cn"
 git-repository-url  = "https://github.com/patricky-tau/swpuacm-wiki/"
-edit-url-template   = "https://github.com/patricky-tau/swpuacm-wiki/edit/main/{path}"
+edit-url-template   = "https://github.com/patricky-tau/swpuacm-wiki/edit/master/{path}"
 
 [output.html.print]
 enable              = false
 
 [output.html.fold]
 enable              = true
-level               = 1
+level               = 3
