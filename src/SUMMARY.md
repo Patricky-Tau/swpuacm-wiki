@@ -7,6 +7,7 @@
     - [摸底测试](./train/basic-test/index.md)
         - [动态规划](./train/basic-test/dp.md)  
         - [数据结构](./train/basic-test/ds.md)  
+        - [二分、贪心、构造与 adhoc](./train/basic-test/misc.md)  
 <!--     - [STL](./lang/stl.md) -->
 <!--     - [pb_ds](./lang/pb_ds.md) -->
 <!-- - [算法基础](./basic/index.md)
