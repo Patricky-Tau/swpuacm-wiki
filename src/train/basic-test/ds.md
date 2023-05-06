@@ -58,11 +58,11 @@ int main() {
 </details>
 
 ### 逆天顺序对
-> 求满足 $i \lt a_i \lt j \lt a_j$ 的 $(i, j)$ 对子数量。
+> 求满足 $a_i \lt i \lt a_j \lt j$ 的 $(i, j)$ 对子数量。
 >
 > $n \leq 2 \cdot 10^5, 0 \leq a_i \leq 10^9$
 
-树状数组模板题，拆成三个条件 $a_i \gt i, a_j \gt j, a_i \lt a_j$。
+树状数组模板题，拆成三个条件 $a_i \lt i, a_j \lt j, a_i \lt a_j$。
 
 > 李冉曦写的可持久化线段树：<https://codeforces.com/contest/1703/submission/204527915>
 
