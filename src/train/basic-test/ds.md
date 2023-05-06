@@ -64,6 +64,8 @@ int main() {
 
 树状数组模板题，拆成三个条件 $a_i \gt i, a_j \gt j, a_i \lt a_j$。
 
+> 李冉曦写的可持久化线段树：<https://codeforces.com/contest/1703/submission/204527915>
+
 <details><summary>展开代码</summary>
 
 ```cpp
@@ -203,4 +205,114 @@ int main() {
 
 线段树模板题，直接拆位做。
 
-代码略。
+> 李冉曦写的线段树：<https://codeforces.com/contest/242/submission/204522980>
+
+<details><summary>线段树的写法多样，不建议参考</summary>
+
+```cpp
+#include <bits/stdc++.h>
+
+using ll = long long;
+
+const int N = 100010;
+int n, m, a[N];
+int tag[N << 2], flip[N << 2][20];
+
+#define ls p << 1
+#define rs ls | 1
+
+void pushup(int p) {
+    for (int i = 0; i < 20; i++) {
+        flip[p][i] = flip[ls][i] + flip[rs][i];
+    }
+}
+
+void build(int L, int R, int p) {
+    if (L == R) {
+        for (int i = 0; i < 20; i++) {
+            if (a[L] >> i & 1) {
+                flip[p][i] = 1;
+            }
+        }
+        return;
+    }
+
+    int m = (L + R) / 2;
+    build(L, m, ls), build(m + 1, R, rs);
+    pushup(p);
+}
+
+void pushdown(int L, int R, int p) {
+    if (tag[p]) {
+        int m = (L + R) / 2;
+        for (int i = 0; i < 20; i++) {
+            if (tag[p] >> i & 1) {
+                flip[ls][i] = (m - L + 1) - flip[ls][i];
+                flip[rs][i] = (R - m) - flip[rs][i];
+            }
+        }
+        tag[ls] ^= tag[p], tag[rs] ^= tag[p];
+        tag[p] = 0;
+    }
+}
+
+void update(int L, int R, int p, int l, int r, int val) {
+    if (R < l || r < L) return;
+    if (l <= L && R <= r) {
+        for (int i = 0; i < 20; i++) {
+            if (val >> i & 1) {
+                flip[p][i] = (R - L + 1) - flip[p][i];
+            }
+        }
+        tag[p] ^= val;
+        return;
+    }
+    pushdown(L, R, p);
+
+    int m = (L + R) / 2;
+    update(L, m, ls, l, r, val), update(m + 1, R, rs, l, r, val);
+    pushup(p);
+}
+
+ll query(int L, int R, int p, int l, int r) {
+    if (R < l || r < L) return 0;
+    if (l <= L && R <= r) {
+        ll ret = 0;
+        for (int i = 0; i < 20; i++) {
+            ret += (ll)flip[p][i] * (1 << i);
+        }
+        return ret;
+    }
+    pushdown(L, R, p);
+
+    int m = (L + R) / 2;
+    return query(L, m, ls, l, r) + query(m + 1, R, rs, l, r);
+}
+
+int main() {
+    std::cin.tie(nullptr)->sync_with_stdio(false);
+
+    std::cin >> n;
+    for (int i = 1; i <= n; i++) {
+        std::cin >> a[i];
+    }
+
+    build(1, n, 1);
+
+    std::cin >> m;
+    while (m--) {
+        int op, l, r, x;
+        std::cin >> op >> l >> r;
+        if (op == 1) {
+            std::cout << query(1, n, 1, l, r) << '\n';
+        } else {
+            std::cin >> x;
+            update(1, n, 1, l, r, x);
+        }
+    }
+
+    return 0;
+}
+```
+
+</details>
