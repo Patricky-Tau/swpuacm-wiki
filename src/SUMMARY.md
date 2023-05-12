@@ -10,8 +10,8 @@
         - [二分、贪心、构造与 adhoc](./train/basic-test/misc.md)  
         - [图论](./train/basic-test/graph.md)  
         - [数学](./train/basic-test/math.md)  
-- [省赛选拔]()
-    - [2022 - ABC269]()
+- [省赛选拔](./scpc-tryout/index.md)
+    - [2022 - ABC269](./scpc-tryout/2022.md)
     - [2023 - 小白月赛72](./scpc-tryout/2023.md)
 <!--     - [STL](./lang/stl.md) -->
 <!--     - [pb_ds](./lang/pb_ds.md) -->
